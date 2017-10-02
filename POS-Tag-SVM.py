@@ -12,6 +12,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.neural_network import MLPClassifier
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
 import numpy
 
 X = []
@@ -35,9 +36,9 @@ for line in f:
       'suffix-3': sentence[1][-3:],
       'prev_tag': '' if sentence[0] == '1' else y[len(X)-1],
       'prev_word': '' if sentence[0] == '1' else X[len(X)-1]['word'],
-      'has_hyphen': '-' in sentence[1],
-      'is_numeric': sentence[1].isdigit(),
-      'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] }
+#      'has_hyphen': '-' in sentence[1],
+      'is_numeric': sentence[1].isdigit() }
+#      'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] }
     )
     y.append(sentence[3])
     
@@ -70,5 +71,7 @@ print 'Training completed'
  
 print "Testing started"
 score = clf.score(test_sentences, test_tags)
+print "F1 Score"
+print f1_score(test_tags, clf.predict(test_sentences), average='weighted')
 print "Accuracy:", score
 
