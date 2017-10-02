@@ -1,0 +1,21 @@
+{
+  "features": [ 
+      "word",
+      "is_first",
+      "is_last",
+      "is_capitalized",
+      "is_all_caps",
+      "is_all_lower",
+      "prefix-1",
+      "prefix-2",
+      "prefix-3",
+      "suffix-1",
+      "suffix-2",
+      "suffix-3",
+      "prev_word",
+      "has_hyphen",
+      "is_numeric",
+      "capitals_inside" 
+  ],
+  "algorithm": "SVM"
+}
