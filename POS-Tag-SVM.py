@@ -12,6 +12,7 @@ from sklearn.linear_model import SGDClassifier
 from sklearn import svm
 from sklearn.neural_network import MLPClassifier
 from sklearn.feature_extraction import DictVectorizer
+from sklearn.metrics import confusion_matrix, f1_score, accuracy_score
 import numpy
 import json
 import sys
@@ -113,5 +114,7 @@ print 'Training completed'
  
 print "Testing started"
 score = clf.score(test_sentences, test_tags)
+print "F1 Score"
+print f1_score(test_tags, clf.predict(test_sentences), average='weighted')
 print "Accuracy:", score
 
