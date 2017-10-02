@@ -40,12 +40,14 @@ for line in f:
       'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] }
     )
     y.append(sentence[4])
-    
+f.close
+
 print "Feature data size : "+str(len(X))
 print "Label data size : "+str(len(y))
 
 v = DictVectorizer(sparse=False)
 X = v.fit_transform(X)
+v = None
 
 print "Dividing dataset into training set and testing set ..."
 cutoff = int(.75 * len(X))
@@ -53,17 +55,19 @@ training_sentences = X[:cutoff]
 training_tags = y[:cutoff]
 test_sentences = X[cutoff:]
 test_tags = y[cutoff:]
+X = []
+y = []
 
 print "Training set size : "+str(len(training_sentences))  
 print "Testing set size : "+str(len(test_sentences))
 
 
-#clf = SGDClassifier(loss='log')
+clf = SGDClassifier(loss='log')
 #clf = svm.SVC(decision_function_shape='ovo')
-clf = MLPClassifier(solver='adam', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
+#clf = MLPClassifier(solver='adam', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
 
 print 'Training started'
-n_iter = 10
+n_iter = 12
 for n in range(n_iter):
     clf.partial_fit(training_sentences[(n*10000):((n+1)*10000)], training_tags[(n*10000):((n+1)*10000)],classes=numpy.unique(training_tags))  
     print "Training progress "+str((n*10000))
