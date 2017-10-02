@@ -41,8 +41,8 @@ for line in f:
     )
     y.append(sentence[4])
     
-print "Feature data size : "+len(X)
-print "Label data size : "+len(y)
+print "Feature data size : "+str(len(X))
+print "Label data size : "+str(len(y))
 
 v = DictVectorizer(sparse=False)
 X = v.fit_transform(X)
@@ -54,8 +54,8 @@ training_tags = y[:cutoff]
 test_sentences = X[cutoff:]
 test_tags = y[cutoff:]
 
-print "Training set size : "+len(training_sentences)   
-print "Testing set size : "+len(test_sentences)
+print "Training set size : "+str(len(training_sentences))  
+print "Testing set size : "+str(len(test_sentences))
 
 
 #clf = SGDClassifier(loss='log')
@@ -66,7 +66,7 @@ print 'Training started'
 n_iter = 10
 for n in range(n_iter):
     clf.partial_fit(training_sentences[(n*10000):((n+1)*10000)], training_tags[(n*10000):((n+1)*10000)],classes=numpy.unique(training_tags))  
-    print "Training progress "+(n*10000)
+    print "Training progress "+str((n*10000))
 print 'Training completed'
  
 print "Testing started"
