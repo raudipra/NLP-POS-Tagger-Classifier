@@ -57,19 +57,13 @@ test_tags = y[cutoff:]
 print "Training set size : "+str(training_sentences.shape[0])  
 print "Testing set size : "+str(test_sentences.shape[0])
 
-
+epoch = 100
 #clf = SGDClassifier(loss='log')
-clf = svm.SVC(decision_function_shape='ovo')
-#clf = MLPClassifier(solver='adam', alpha=1e-5,hidden_layer_sizes=(5, 2), random_state=1)
+#clf = svm.SVC(decision_function_shape='ovo')
+clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(17, 17,17,17), random_state=1,max_iter=epoch)
 
 print 'Training started'
-n_iter = 5
-for x in range(n_iter):
-    n_batch = 15
-    for n in range(n_batch):
-        #clf.partial_fit(training_sentences[(n*10000):((n+1)*10000)], training_tags[(n*10000):((n+1)*10000)],classes=numpy.unique(training_tags))  
-        clf.fit(training_sentences[(n*10000):((n+1)*10000)], training_tags[(n*10000):((n+1)*10000)])  
-        print "Training progress "+str((n*10000))
+clf.fit(training_sentences, training_tags)  
 print 'Training completed'
  
 print "Testing started"
