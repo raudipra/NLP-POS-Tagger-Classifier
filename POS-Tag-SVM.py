@@ -57,7 +57,7 @@ test_tags = y[cutoff:]
 print "Training set size : "+str(training_sentences.shape[0])  
 print "Testing set size : "+str(test_sentences.shape[0])
 
-epoch = 100
+epoch = 500
 #clf = SGDClassifier(loss='log')
 #clf = svm.SVC(decision_function_shape='ovo')
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(17, 17,17,17), random_state=1,max_iter=epoch)
