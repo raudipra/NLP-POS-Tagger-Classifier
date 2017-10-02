@@ -16,7 +16,7 @@ import numpy
 
 X = []
 y = []
-f = open('en-ud-train.conllu', 'r')
+f = open('id-ud-train+dev.conllu', 'r')
 for line in f:
   sentence = line.split("\t")
   if sentence[0].isdigit():
@@ -39,7 +39,7 @@ for line in f:
       'is_numeric': sentence[1].isdigit(),
       'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] }
     )
-    y.append(sentence[4])
+    y.append(sentence[3])
     
 print "Feature data size : "+str(len(X))
 print "Label data size : "+str(len(y))
@@ -48,7 +48,8 @@ v = DictVectorizer(sparse=True)
 X = v.fit_transform(X)
 
 print "Dividing dataset into training set and testing set ..."
-cutoff = int(.75 * X.shape[0])
+#97531
+cutoff = 97531
 training_sentences = X[:cutoff]
 training_tags = y[:cutoff]
 test_sentences = X[cutoff:]
@@ -57,7 +58,8 @@ test_tags = y[cutoff:]
 print "Training set size : "+str(training_sentences.shape[0])  
 print "Testing set size : "+str(test_sentences.shape[0])
 
-epoch = 500
+
+epoch = 200
 #clf = SGDClassifier(loss='log')
 #clf = svm.SVC(decision_function_shape='ovo')
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(17, 17,17,17), random_state=1,max_iter=epoch)
@@ -69,3 +71,4 @@ print 'Training completed'
 print "Testing started"
 score = clf.score(test_sentences, test_tags)
 print "Accuracy:", score
+
