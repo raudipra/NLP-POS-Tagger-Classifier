@@ -1,0 +1,16 @@
+{
+  "features": [ 
+      "word",
+      "is_first",
+      "is_last",
+      "is_capitalized",
+      "is_all_caps",
+      "is_all_lower",
+      "prev_tag",
+      "prev_word",
+      "has_hyphen",
+      "is_numeric",
+      "capitals_inside" 
+  ],
+  "algorithm": "MLP"
+}
