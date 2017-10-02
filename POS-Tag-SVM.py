@@ -57,7 +57,7 @@ f = open('id-ud-train+dev.conllu', 'r')
 for line in f:
   sentence = line.split("\t")
   if sentence[0].isdigit():
-  	data = {
+    data = {
       'word': sentence[1],
       'is_first': sentence[0] == '1',
       'is_last': sentence[0] == len(sentence) - 1,
@@ -75,7 +75,7 @@ for line in f:
       'has_hyphen': '-' in sentence[1],
       'is_numeric': sentence[1].isdigit(),
       'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] 
-  	}
+    }
 
     X.append({ k: v for k,v in data.items() if k in configuration.features })
     y.append(sentence[3])
