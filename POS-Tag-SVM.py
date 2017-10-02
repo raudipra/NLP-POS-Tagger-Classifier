@@ -77,7 +77,7 @@ for line in f:
       'capitals_inside': sentence[1][1:].lower() != sentence[1][1:] 
     }
 
-    X.append({ k: v for k,v in data.items() if k in configuration.features })
+    X.append({ k: v for k,v in data.items() if k in configuration["features"] })
     y.append(sentence[3])
     
 print "Feature data size : "+str(len(X))
@@ -99,12 +99,13 @@ print "Testing set size : "+str(test_sentences.shape[0])
 
 # default SGD
 clf = SGDClassifier(loss='log')
+print "Algorithm", configuration["algorithm"]
 
-if( configuration.algorithm == "SGD")
+if( configuration["algorithm"] == "SGD"):
 	clf = SGDClassifier(loss='log')
-elif( configuration.algorithm == "SVM")
+elif( configuration["algorithm"] == "SVM"):
 	clf = svm.SVC(decision_function_shape='ovo')
-elif ( configuration.algorithm == "MLP" )
+elif ( configuration["algorithm"] == "MLP" ):
 	epoch = 200
 	clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(17, 17,17,17), random_state=1,max_iter=epoch)
 
