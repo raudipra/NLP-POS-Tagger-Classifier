@@ -16,7 +16,7 @@ import numpy
 
 X = []
 y = []
-f = open('en-ud-train.conllu', 'r')
+f = open('id-ud-train.conllu', 'r')
 for line in f:
   sentence = line.split("\t")
   if sentence[0].isdigit():
@@ -57,7 +57,7 @@ test_tags = y[cutoff:]
 print "Training set size : "+str(training_sentences.shape[0])  
 print "Testing set size : "+str(test_sentences.shape[0])
 
-epoch = 100
+epoch = 200
 #clf = SGDClassifier(loss='log')
 #clf = svm.SVC(decision_function_shape='ovo')
 clf = MLPClassifier(solver='lbfgs', alpha=1e-5,hidden_layer_sizes=(17, 17,17,17), random_state=1,max_iter=epoch)
